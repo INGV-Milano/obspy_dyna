@@ -39,7 +39,7 @@ Installation is straightforward:
 
 unpack the archive, cd in the obspy_dyna directory and type
 
-"python setup.py" as root
+"python setup.py install" as root
 
 
 
