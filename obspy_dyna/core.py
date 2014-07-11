@@ -123,7 +123,7 @@ def readDYNA(filename, headonly=False, **kwargs):  # @UnusedVariable
     header['network'] = headers['NETWORK']
     header['station'] = headers['STATION_CODE']
     header['location'] = headers['LOCATION'] 
-    header['channel'] = headers['STREAM'][2:3]
+    header['channel'] = headers['STREAM']
     try:
         header['starttime'] = toUTCDateTime(headers['DATE_TIME_FIRST_SAMPLE_YYYYMMDD_HHMMSS']) # use toUTCDateTime to convert from DYNA format
     except:
@@ -186,7 +186,6 @@ def readDYNA(filename, headonly=False, **kwargs):  # @UnusedVariable
     header['dyna']['SITE_CLASSIFICATION_EC8'] = headers['SITE_CLASSIFICATION_EC8']
     header['dyna']['MORPHOLOGIC_CLASSIFICATION'] = headers['MORPHOLOGIC_CLASSIFICATION']
     header['dyna']['DATE_TIME_FIRST_SAMPLE_PRECISION'] = headers['DATE_TIME_FIRST_SAMPLE_PRECISION']
-    header['dyna']['STREAM'] = headers['STREAM']
     header['dyna']['UNITS'] = headers['UNITS']
     header['dyna']['INSTRUMENT'] = headers['INSTRUMENT']
     header['dyna']['INSTRUMENT_ANALOG_DIGITAL'] = headers['INSTRUMENT_ANALOG/DIGITAL']
@@ -420,7 +419,7 @@ def writeDYNA(stream, filename, **kwargs):  # @UnusedVariable
     fh.write("SAMPLING_INTERVAL_S: %s\n" % floattostr(stream[0].stats.delta,6))
     fh.write("NDATA: %s\n" % floattostr(stream[0].stats.npts,0))
     fh.write("DURATION_S: %s\n" % floattostr(stream[0].stats.dyna.DURATION_S,6))
-    fh.write("STREAM: %s\n" % stream[0].stats.dyna.STREAM)
+    fh.write("STREAM: %s\n" % stream[0].stats.channel)
     fh.write("UNITS: %s\n" % stream[0].stats.dyna.UNITS)
     fh.write("INSTRUMENT: %s\n" % stream[0].stats.dyna.INSTRUMENT)
     fh.write("INSTRUMENT_ANALOG/DIGITAL: %s\n" % stream[0].stats.dyna.INSTRUMENT_ANALOG_DIGITAL)
